@@ -11,13 +11,25 @@ namespace WcfServiceLibraryChat
     [ServiceContract]
     public interface IService1
     {
-        #region DefaualCode
+        //Код из шаблона проекта
+        #region DefaultCode
         [OperationContract]
         string GetData(int value);
 
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
+        // TODO: Добавьте здесь операции служб 
+
+        #endregion
+
+
+        // РБ-Софт пример добавления функционала
+        #region RB-Soft
+        [OperationContract]
+        string Hello(string message);
+
+        #endregion
     }
 
     // Используйте контракт данных, как показано на следующем примере, чтобы добавить сложные типы к сервисным операциям.
