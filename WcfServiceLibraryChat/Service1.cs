@@ -37,10 +37,21 @@ namespace WcfServiceLibraryChat
         // РБ-Софт пример добавления функционала
         #region RB-Soft
 
+        /// <summary>
+        ///  Пример истории
+        /// </summary>
+        private static  List<string> history = new List<string>();
+
         public string Hello(string message)
         {
             string answer = "you say me " + message;
-            return answer;
+            history.Add(answer);
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (var item in history)
+            {
+                stringBuilder.AppendLine(item);
+            }
+            return stringBuilder.ToString();
         }
 
         #endregion
