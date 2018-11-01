@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.listBoxHistory = new System.Windows.Forms.ListBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.hisotyMessagesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.buttonSendMessage = new System.Windows.Forms.Button();
             this.textBoxInputMessage = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -47,10 +48,9 @@
             this.buttonAbout = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.hisotyMessagesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hisotyMessagesBindingSource)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBoxHistory
@@ -70,6 +70,11 @@
             // bindingSource1
             // 
             this.bindingSource1.DataSource = typeof(WindowsFormsChat.Model);
+            // 
+            // hisotyMessagesBindingSource
+            // 
+            this.hisotyMessagesBindingSource.DataMember = "HisotyMessages";
+            this.hisotyMessagesBindingSource.DataSource = this.bindingSource1;
             // 
             // buttonSendMessage
             // 
@@ -95,16 +100,17 @@
             this.textBoxInputMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxInputMessage.Size = new System.Drawing.Size(782, 86);
             this.textBoxInputMessage.TabIndex = 2;
+            this.textBoxInputMessage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxInputMessage_KeyDown);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 266);
+            this.label1.Location = new System.Drawing.Point(570, 267);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(135, 18);
+            this.label1.Size = new System.Drawing.Size(235, 18);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Новое сообщение";
+            this.label1.Text = "Отправить сообщение Ctrl+Enter";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // textBoxServer
@@ -246,11 +252,6 @@
             this.label7.TabIndex = 5;
             this.label7.Text = "{Статус подключения}";
             // 
-            // hisotyMessagesBindingSource
-            // 
-            this.hisotyMessagesBindingSource.DataMember = "HisotyMessages";
-            this.hisotyMessagesBindingSource.DataSource = this.bindingSource1;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -273,9 +274,9 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hisotyMessagesBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.hisotyMessagesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

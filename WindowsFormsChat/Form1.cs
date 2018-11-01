@@ -34,7 +34,18 @@ namespace WindowsFormsChat
 
         private void buttonTest_Click(object sender, EventArgs e)
         {
+            RunTestAndFocusToInput();
+        }
+
+        private void RunTestAndFocusToInput()
+        {
             model.RunTest();
+            FocusToInput();
+        }
+
+        private void FocusToInput()
+        {
+            textBoxInputMessage.Focus();
         }
 
         private void buttonConnectToServer_Click(object sender, EventArgs e)
@@ -57,6 +68,16 @@ namespace WindowsFormsChat
         private void buttonAbout_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Клиент для создания чата", "РБ-Софт", MessageBoxButtons.OK);
+        }
+
+        private void textBoxInputMessage_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Хоткей на нажатие Ctrl+Enter
+            if ((e.Control && e.KeyCode == Keys.Enter))
+            {
+                RunTestAndFocusToInput();
+                e.SuppressKeyPress = true;
+            }
         }
     }
 }

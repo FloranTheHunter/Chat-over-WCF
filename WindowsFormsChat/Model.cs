@@ -103,7 +103,6 @@ namespace WindowsFormsChat
         private void FillHistory(List<string> messages)
         {
             HisotyMessages.Clear();
-
             foreach (var item in messages)
             {
                 HisotyMessages.Add(item);
@@ -115,11 +114,12 @@ namespace WindowsFormsChat
         /// </summary>
         public void RunTest()
         {
-            string newMessage = Name + " : " + InputMessage + " " + DateTime.Now.ToString();
+            string newMessage =  $"{DateTime.Now.ToLongTimeString()} {Name} : {InputMessage}";
             string message = client.Hello(newMessage);
+            InputMessage = string.Empty;
 
             List<string> messages = new List<string>();
-            messages.Add(message);
+            messages.AddRange(message.Split('\n'));
             FillHistory(messages);
         }
 
@@ -161,10 +161,10 @@ namespace WindowsFormsChat
             // заглушка истории сообщений
             List<string> messages = new List<string>();
             System.Windows.Forms.MessageBox.Show("Заглушка запроса истории сообщений");
-            messages.Add($"{DateTime.Now.ToShortTimeString()} пользователь1 : Привет");
+            messages.Add($"{DateTime.Now.ToLongTimeString()} пользователь1 : Привет");
             messages.Add($"{DateTime.Now.ToLongTimeString()} пользователь2 : Привет, как дела)");
-            messages.Add($"{DateTime.Now.ToShortTimeString()} пользователь1 : Ты робот?");
-            messages.Add($"{DateTime.Now.ToShortTimeString()} пользователь2 : Почти...");
+            messages.Add($"{DateTime.Now.ToLongTimeString()} пользователь1 : Ты робот?");
+            messages.Add($"{DateTime.Now.ToLongTimeString()} пользователь2 : Почти...");
 
             return messages;
         }
