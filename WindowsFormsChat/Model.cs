@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WindowsFormsChat
 {
@@ -14,13 +11,15 @@ namespace WindowsFormsChat
     public class Model : INotifyPropertyChanged
     {
         #region Bindings
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        #endregion
+
+        #endregion Bindings
 
         private string _serverAddress;
         private int _serverPort;
@@ -29,7 +28,6 @@ namespace WindowsFormsChat
         private bool _isConncet;
 
         private ServiceReference1.Service1Client client;
-
 
         public bool IsConnect
         {
@@ -40,7 +38,9 @@ namespace WindowsFormsChat
                 NotifyPropertyChanged();
             }
         }
+
         public BindingList<string> HisotyMessages { get; set; }
+
         public string ServerAddress
         {
             get => _serverAddress;
@@ -50,6 +50,7 @@ namespace WindowsFormsChat
                 NotifyPropertyChanged();
             }
         }
+
         public int ServerPort
         {
             get => _serverPort;
@@ -68,6 +69,7 @@ namespace WindowsFormsChat
                 NotifyPropertyChanged();
             }
         }
+
         public string InputMessage
         {
             get => _inputMessage;
@@ -124,7 +126,7 @@ namespace WindowsFormsChat
         public void Conncet()
         {
             string endpointAddress = $"http://{ServerAddress}:{ServerPort}/Design_Time_Addresses/WcfServiceLibraryChat/Service1/";
-            client = new ServiceReference1.Service1Client("BasicHttpBinding_IService1",endpointAddress);
+            client = new ServiceReference1.Service1Client("BasicHttpBinding_IService1", endpointAddress);
             client.Open();
             IsConnect = true;
         }
@@ -163,8 +165,7 @@ namespace WindowsFormsChat
             messages.Add($"{DateTime.Now.ToLongTimeString()} пользователь2 : Привет, как дела)");
             messages.Add($"{DateTime.Now.ToShortTimeString()} пользователь1 : Ты робот?");
             messages.Add($"{DateTime.Now.ToShortTimeString()} пользователь2 : Почти...");
-            
-            
+
             return messages;
         }
     }

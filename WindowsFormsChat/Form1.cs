@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsChat
@@ -13,6 +6,7 @@ namespace WindowsFormsChat
     public partial class Form1 : Form
     {
         private Model model;
+
         public Form1()
         {
             InitializeComponent();
@@ -28,17 +22,14 @@ namespace WindowsFormsChat
 
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void buttonTest_Click(object sender, EventArgs e)
@@ -61,12 +52,11 @@ namespace WindowsFormsChat
         private void buttonSendMessage_Click(object sender, EventArgs e)
         {
             model.SendMessage();
-
         }
 
         private void buttonAbout_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Клиент для создания чата","РБ-Софт",MessageBoxButtons.OK);
+            MessageBox.Show("Клиент для создания чата", "РБ-Софт", MessageBoxButtons.OK);
         }
     }
 }
