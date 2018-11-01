@@ -57,5 +57,16 @@ namespace WindowsFormsChat
                 model.Conncet();
             }
         }
+
+        private void buttonSendMessage_Click(object sender, EventArgs e)
+        {
+            model.SendMessage();
+
+        }
+
+        private void buttonAbout_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Клиент для создания чата","РБ-Софт",MessageBoxButtons.OK);
+        }
     }
 }

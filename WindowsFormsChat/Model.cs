@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsChat
 {
+    /// <summary>
+    /// Представляет модель клиента чата
+    /// </summary>
     public class Model : INotifyPropertyChanged
     {
         #region Bindings
@@ -55,6 +58,7 @@ namespace WindowsFormsChat
                 _serverPort = value; NotifyPropertyChanged();
             }
         }
+
         public string Name
         {
             get => _name;
@@ -74,10 +78,28 @@ namespace WindowsFormsChat
             }
         }
 
+        public Model()
+        {
+            InitDefault();
+            HisotyMessages = new BindingList<string>();
+        }
+
+        /// <summary>
+        /// Инициализация данных по умолчанию
+        /// </summary>
+        private void InitDefault()
+        {
+            ServerPort = 8733;
+            ServerAddress = "localhost";
+            Name = "Марк Цукерберг";
+        }
+
+        /// <summary>
+        /// Заполнить историю
+        /// </summary>
+        /// <param name="messages">The messages.</param>
         private void FillHistory(List<string> messages)
         {
-            if (HisotyMessages == null)
-                HisotyMessages = new BindingList<string>();
             HisotyMessages.Clear();
 
             foreach (var item in messages)
@@ -87,11 +109,11 @@ namespace WindowsFormsChat
         }
 
         /// <summary>
-        /// пример запроса к сервису
+        /// Пример отправки сообщения к сервису  и получение ответа от него
         /// </summary>
         public void RunTest()
         {
-            string newMessage = Name + " : " + InputMessage;
+            string newMessage = Name + " : " + InputMessage + " " + DateTime.Now.ToString();
             string message = client.Hello(newMessage);
 
             List<string> messages = new List<string>();
@@ -101,13 +123,49 @@ namespace WindowsFormsChat
 
         public void Conncet()
         {
-
-            client = new ServiceReference1.Service1Client();
+            string endpointAddress = $"http://{ServerAddress}:{ServerPort}/Design_Time_Addresses/WcfServiceLibraryChat/Service1/";
+            client = new ServiceReference1.Service1Client("BasicHttpBinding_IService1",endpointAddress);
             client.Open();
-
             IsConnect = true;
+        }
 
+        /// <summary>
+        /// Отправка сообщения на сервер
+        /// </summary>
+        public void SendMessage()
+        {
+            string newMessage = Name + " : " + InputMessage;
 
+            //TODO вызвать отправку сообщения на сервер
+            // примерно как здесь
+            // client.SendMessage(newMessage);
+
+            System.Windows.Forms.MessageBox.Show("Заглушка отправки сообщения. Сообщение " + newMessage);
+
+            List<string> messages = GetHistoryMessages();
+            FillHistory(messages);
+        }
+
+        /// <summary>
+        /// Запрос истории сообщений с сервера
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetHistoryMessages()
+        {
+            // TODO реализовать запрос с сообщениями
+            // примерно как здесь
+            // List<string> messages = client.GetHistory();
+
+            // заглушка истории сообщений
+            List<string> messages = new List<string>();
+            System.Windows.Forms.MessageBox.Show("Заглушка запроса истории сообщений");
+            messages.Add($"{DateTime.Now.ToShortTimeString()} пользователь1 : Привет");
+            messages.Add($"{DateTime.Now.ToLongTimeString()} пользователь2 : Привет, как дела)");
+            messages.Add($"{DateTime.Now.ToShortTimeString()} пользователь1 : Ты робот?");
+            messages.Add($"{DateTime.Now.ToShortTimeString()} пользователь2 : Почти...");
+            
+            
+            return messages;
         }
     }
 }
