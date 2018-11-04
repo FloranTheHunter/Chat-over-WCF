@@ -60,18 +60,20 @@ namespace WcfServiceLibraryChat
         public List<string> GetHistory()
         {
             List<string> message = new List<string>();
-            StreamReader reader = new StreamReader("MessageHistory.txt");
+            StreamReader reader = new StreamReader(@"MessageHistory.txt");
             while (!reader.EndOfStream)
             {
-                message.Add(reader.ReadLine());
+                message.Add(reader.ReadLine());                
             }
+            reader.Close();
             return message;
         }
 
         public void UpdateHistory(string message)
         {
-            StreamWriter w = new StreamWriter("MessageHistory.txt");
+            StreamWriter w = new StreamWriter("MessageHistory.txt", true);
             w.WriteLine(message);
+            w.Close();
         }
     }
 }

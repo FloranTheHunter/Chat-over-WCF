@@ -57,6 +57,9 @@ namespace WindowsFormsChat
             else
             {
                 model.Connect();
+                model.InputMessage = "подключился";
+                model.SendMessage();
+                model.InputMessage = "";
             }
         }
 

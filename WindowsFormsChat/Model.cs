@@ -165,5 +165,6 @@ namespace WindowsFormsChat
             messages.AddRange(client.GetHistory());
             return messages;
         }
+
     }
 }
