@@ -34,7 +34,14 @@ namespace WindowsFormsChat
 
         private void buttonTest_Click(object sender, EventArgs e)
         {
-            RunTestAndFocusToInput();
+            try
+            {
+                RunTestAndFocusToInput();
+            }
+            catch
+            {
+                MessageBox.Show("Нет подключения к серверу!");
+            }
         }
 
         private void RunTestAndFocusToInput()
@@ -56,17 +63,34 @@ namespace WindowsFormsChat
             }
             else
             {
-                model.Connect();
-                model.InputMessage = "подключился";
-                model.SendMessage();
-                model.InputMessage = "";
+                try
+                {
+                    model.Connect();
+                    model.InputMessage = "подключился";
+                    model.SendMessage();
+                    model.InputMessage = "";
+                    textBoxInputMessage.Text = model.InputMessage;
+                }
+                catch
+                {
+                    MessageBox.Show("Невозможно подключится к серверу!");
+                }
             }
         }
 
         private void buttonSendMessage_Click(object sender, EventArgs e)
         {
-            model.InputMessage = textBoxInputMessage.Text;
-            model.SendMessage();
+            try
+            {
+                model.InputMessage = textBoxInputMessage.Text;
+                model.SendMessage();
+                model.InputMessage = "";
+                textBoxInputMessage.Text = model.InputMessage;
+            }
+            catch
+            {
+                MessageBox.Show("Нет подключения к серверу!");
+            }
         }
 
         private void buttonAbout_Click(object sender, EventArgs e)
@@ -76,12 +100,21 @@ namespace WindowsFormsChat
 
         private void textBoxInputMessage_KeyDown(object sender, KeyEventArgs e)
         {
-            // Хоткей на нажатие Ctrl+Enter
-            if ((e.Control && e.KeyCode == Keys.Enter))
+            try
             {
-                model.InputMessage = textBoxInputMessage.Text;
-                model.SendMessage();
-                e.SuppressKeyPress = true;
+                // Хоткей на нажатие Ctrl+Enter
+                if ((e.Control && e.KeyCode == Keys.Enter))
+                {
+                    model.InputMessage = textBoxInputMessage.Text;
+                    model.SendMessage();
+                    model.InputMessage = "";
+                    textBoxInputMessage.Text = model.InputMessage;
+                    e.SuppressKeyPress = true;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Нет подключения к серверу!");
             }
         }
     }
