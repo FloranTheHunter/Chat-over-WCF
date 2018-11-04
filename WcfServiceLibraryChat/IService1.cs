@@ -30,6 +30,12 @@ namespace WcfServiceLibraryChat
         string Hello(string message);
 
         #endregion
+
+        [OperationContract]
+        List<string> GetHistory();
+
+        [OperationContract]
+        void UpdateHistory(string message);
     }
 
     // Используйте контракт данных, как показано на следующем примере, чтобы добавить сложные типы к сервисным операциям.

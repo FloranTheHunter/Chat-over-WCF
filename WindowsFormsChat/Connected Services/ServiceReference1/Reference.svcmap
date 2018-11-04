@@ -26,6 +26,7 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="30cae536-6713-44a6-9387-7dab84fa0419" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WcfServiceLibraryChat/Service1/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="24d411f3-053a-4cef-b2b2-56717a3d1ba8" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WcfServiceLibraryChat/Service1/mex" />
     <MetadataFile FileName="WcfServiceLibraryChat.xsd" MetadataType="Schema" ID="3d2b6f8f-5b4f-478f-a591-d281d94152b8" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WcfServiceLibraryChat/Service1/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="c779805b-7af3-4f18-8e6d-00beff5a7b39" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/WcfServiceLibraryChat/Service1/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

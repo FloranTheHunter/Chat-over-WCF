@@ -73,6 +73,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Connected Services\ServiceReference1\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\ServiceReference1\service.wsdl" />
     <None Include="Connected Services\ServiceReference1\service.xsd">
       <SubType>Designer</SubType>

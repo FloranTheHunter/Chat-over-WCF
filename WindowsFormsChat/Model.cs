@@ -93,7 +93,7 @@ namespace WindowsFormsChat
         {
             ServerPort = 8733;
             ServerAddress = "localhost";
-            Name = "Марк Цукерберг";
+            Name = "user";
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace WindowsFormsChat
             FillHistory(messages);
         }
 
-        public void Conncet()
+        public void Connect()
         {
             string endpointAddress = $"http://{ServerAddress}:{ServerPort}/Design_Time_Addresses/WcfServiceLibraryChat/Service1/";
             client = new ServiceReference1.Service1Client("BasicHttpBinding_IService1", endpointAddress);
@@ -141,8 +141,10 @@ namespace WindowsFormsChat
             //TODO вызвать отправку сообщения на сервер
             // примерно как здесь
             // client.SendMessage(newMessage);
+            client.UpdateHistory(newMessage);
 
-            System.Windows.Forms.MessageBox.Show("Заглушка отправки сообщения. Сообщение " + newMessage);
+
+            // System.Windows.Forms.MessageBox.Show("Заглушка отправки сообщения. Сообщение " + newMessage);
 
             List<string> messages = GetHistoryMessages();
             FillHistory(messages);
@@ -160,12 +162,7 @@ namespace WindowsFormsChat
 
             // заглушка истории сообщений
             List<string> messages = new List<string>();
-            System.Windows.Forms.MessageBox.Show("Заглушка запроса истории сообщений");
-            messages.Add($"{DateTime.Now.ToLongTimeString()} пользователь1 : Привет");
-            messages.Add($"{DateTime.Now.ToLongTimeString()} пользователь2 : Привет, как дела)");
-            messages.Add($"{DateTime.Now.ToLongTimeString()} пользователь1 : Ты робот?");
-            messages.Add($"{DateTime.Now.ToLongTimeString()} пользователь2 : Почти...");
-
+            messages.AddRange(client.GetHistory());
             return messages;
         }
     }

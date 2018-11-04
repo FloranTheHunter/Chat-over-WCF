@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -55,5 +56,22 @@ namespace WcfServiceLibraryChat
         }
 
         #endregion
+
+        public List<string> GetHistory()
+        {
+            List<string> message = new List<string>();
+            StreamReader reader = new StreamReader("MessageHistory.txt");
+            while (!reader.EndOfStream)
+            {
+                message.Add(reader.ReadLine());
+            }
+            return message;
+        }
+
+        public void UpdateHistory(string message)
+        {
+            StreamWriter w = new StreamWriter("MessageHistory.txt");
+            w.WriteLine(message);
+        }
     }
 }

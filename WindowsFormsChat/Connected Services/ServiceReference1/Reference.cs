@@ -95,6 +95,18 @@ namespace WindowsFormsChat.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Hello", ReplyAction="http://tempuri.org/IService1/HelloResponse")]
         System.Threading.Tasks.Task<string> HelloAsync(string message);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetHistory", ReplyAction="http://tempuri.org/IService1/GetHistoryResponse")]
+        string[] GetHistory();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetHistory", ReplyAction="http://tempuri.org/IService1/GetHistoryResponse")]
+        System.Threading.Tasks.Task<string[]> GetHistoryAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateHistory", ReplyAction="http://tempuri.org/IService1/UpdateHistoryResponse")]
+        void UpdateHistory(string message);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateHistory", ReplyAction="http://tempuri.org/IService1/UpdateHistoryResponse")]
+        System.Threading.Tasks.Task UpdateHistoryAsync(string message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -146,6 +158,22 @@ namespace WindowsFormsChat.ServiceReference1 {
         
         public System.Threading.Tasks.Task<string> HelloAsync(string message) {
             return base.Channel.HelloAsync(message);
+        }
+        
+        public string[] GetHistory() {
+            return base.Channel.GetHistory();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> GetHistoryAsync() {
+            return base.Channel.GetHistoryAsync();
+        }
+        
+        public void UpdateHistory(string message) {
+            base.Channel.UpdateHistory(message);
+        }
+        
+        public System.Threading.Tasks.Task UpdateHistoryAsync(string message) {
+            return base.Channel.UpdateHistoryAsync(message);
         }
     }
 }

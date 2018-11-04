@@ -56,12 +56,13 @@ namespace WindowsFormsChat
             }
             else
             {
-                model.Conncet();
+                model.Connect();
             }
         }
 
         private void buttonSendMessage_Click(object sender, EventArgs e)
         {
+            model.InputMessage = textBoxInputMessage.Text;
             model.SendMessage();
         }
 
@@ -75,7 +76,8 @@ namespace WindowsFormsChat
             // Хоткей на нажатие Ctrl+Enter
             if ((e.Control && e.KeyCode == Keys.Enter))
             {
-                RunTestAndFocusToInput();
+                model.InputMessage = textBoxInputMessage.Text;
+                model.SendMessage();
                 e.SuppressKeyPress = true;
             }
         }
