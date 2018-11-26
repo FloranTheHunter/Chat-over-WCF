@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Runtime.Serialization.Json;
+using System.Runtime.Serialization;
+using System.Xml;
 
 namespace WcfServiceLibraryChat
 {
@@ -41,7 +43,7 @@ namespace WcfServiceLibraryChat
         /// <summary>
         ///  Пример истории
         /// </summary>
-        private static  List<string> history = new List<string>();
+        private static List<string> history = new List<string>();
 
         public string Hello(string message)
         {
@@ -60,20 +62,57 @@ namespace WcfServiceLibraryChat
         public List<string> GetHistory()
         {
             List<string> message = new List<string>();
-            StreamReader reader = new StreamReader(@"MessageHistory.txt");
-            while (!reader.EndOfStream)
+            List<Message> messageList = new List<Message>();
+
+            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(List<Message>));
+            try
             {
-                message.Add(reader.ReadLine());                
+                using (FileStream fs = new FileStream("MessageHistory.txt", FileMode.OpenOrCreate))
+                {
+                    messageList = (List<Message>)jsonFormatter.ReadObject(fs);
+                    foreach (Message row in messageList)
+                    {
+                        message.Add(row.text);
+                    }
+                }
             }
-            reader.Close();
+            catch
+            {
+                message = null;
+            }
+
+            //StreamReader reader = new StreamReader(@"MessageHistory.txt");
+            //while (!reader.EndOfStream)
+            //{
+            //    message.Add(reader.ReadLine());
+            //}
+            //reader.Close();
             return message;
         }
 
         public void UpdateHistory(string message)
         {
-            StreamWriter w = new StreamWriter("MessageHistory.txt", true);
-            w.WriteLine(message);
-            w.Close();
+            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(List<Message>));
+            List<Message> messageList = new List<Message>();
+            string st = "";
+
+            using (StreamReader fs = new StreamReader("MessageHistory.txt"))
+            {
+                st = fs.ReadToEnd();
+            }
+
+            if (st != "")
+                using (FileStream fs = new FileStream("MessageHistory.txt", FileMode.OpenOrCreate))
+                {
+                    messageList = (List<Message>)jsonFormatter.ReadObject(fs);
+                }
+
+            messageList.Add(new Message(message));
+
+            using (Stream stream = new FileStream("MessageHistory.txt", FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                jsonFormatter.WriteObject(stream, messageList);
+            }
         }
     }
 }

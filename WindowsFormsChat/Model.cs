@@ -31,7 +31,7 @@ namespace WindowsFormsChat
 
         public bool IsConnect
         {
-            get => _isConncet;
+            get { return _isConncet; }
             set
             {
                 _isConncet = value;
@@ -43,7 +43,7 @@ namespace WindowsFormsChat
 
         public string ServerAddress
         {
-            get => _serverAddress;
+            get {return _serverAddress; }
             set
             {
                 _serverAddress = value;
@@ -53,7 +53,8 @@ namespace WindowsFormsChat
 
         public int ServerPort
         {
-            get => _serverPort;
+            get
+            { return _serverPort; }
             set
             {
                 _serverPort = value; NotifyPropertyChanged();
@@ -62,7 +63,8 @@ namespace WindowsFormsChat
 
         public string Name
         {
-            get => _name;
+            get
+            { return _name; }
             set
             {
                 _name = value;
@@ -72,7 +74,8 @@ namespace WindowsFormsChat
 
         public string InputMessage
         {
-            get => _inputMessage;
+            get
+            { return _inputMessage; }
             set
             {
                 _inputMessage = value;
